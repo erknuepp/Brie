@@ -1,37 +1,30 @@
-import numpy
-from scipy import stats
+from argparse import ArgumentError
 
-# Python comment
-'''
- Multi-line comment
-'''
-
-'''
-    Python Hints, Tips, Tricks
-
-    Python is very top down, so if you need something it has to either be defined
-        or imported above where you use it. (This differs from C#/Java)
-    Python makes code blocks/scopes on indents. Typically you indent after a colon. (C#/Java uses curly braces)
-    Python has 4 built in collections: List, Tuple, Set, Dictionary - know the differences in syntax and use.
-
-'''
 
 class ToDo:
 
-    def __init__(self) -> None:
+    def __init__(self, name) -> None:
         '''constructor'''
-        pass
+        if str(name) == "" or name is None:
+            raise ArgumentError("name cannot be null")
+        self.name = name
+        self.completed = False
 
-    def mark_complete():
-        pass
+    def mark_complete(self):
+        self.completed = True
 
 class ToDoList:
 
     def __init__(self) -> None:
-        pass
+        self.todos = []
 
-    def add(todo:ToDo):
-        pass
+    def add(self, todo:ToDo):
+        self.todos.append(todo)
 
 '''main program codes'''
 todo_list = ToDoList()
+todo_list.add(ToDo("Make a GitHub repo"))
+todo_list.add(ToDo("Write some Pythons"))
+
+for todo in todo_list.todos:
+    print(todo.name)
